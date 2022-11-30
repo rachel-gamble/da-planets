@@ -1,31 +1,32 @@
-import { dbContext } from '../DbContext';
-import { BaseController } from '../utils/BaseController.js';
-import { galaxiesService, GalaxiesService } from '../services/GalaxiesService.js'
+import BaseController from "../utils/BaseController.js"
+import { galaxiesService } from '../services/GalaxiesService.js'
 
 
 export class GalaxiesController extends BaseController {
-constructor(){
-    super('api/galaxy')
-    this.router
-    .get('', this.getAllGalaxies)
+    constructor() {
+        super('api/galaxies')
+        this.router
+            .get('', this.getAll)
+            .post('', this.create)
+    }
 
-}
+    async getAll(req, res, next) {
+        try {
+            const galaxies = await galaxiesService.getAll()
+            return res.send(galaxies)
+        } catch (error) {
+            next(error)
+        }
+    }
 
-async getAllGalaxies(req, res, next) {
-try {
-    const galaxies = await galaxiesService.getAllGalaxies()
- return res.send()
-} catch (error) {
- next(error)
-}
-}
+    async create(req, res, next) {
+        try {
+            const newGalaxy = await galaxiesService.create(req.body)
+            return res.send(newGalaxy)
+        } catch (error) {
+            next(error)
+        }
+    }
 
-// async create (req, res, next) {
-// try {
-//     req.body.galaxyId = req.userInfo.id
-//  return res.send()
-// } catch (error) {
-//  next(error)
-// }
-// }
+
 }

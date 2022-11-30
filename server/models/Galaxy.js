@@ -2,12 +2,12 @@ import { Schema } from "mongoose";
 
 export const GalaxySchema = new Schema({
     name: { type: String },
-    parentId: { type: Schema.Types.ObjectId }
+    stars: { type: Number },
 }, { timestamps: true, toJSON: { virtuals: true } })
 
-GalaxySchema.virtual('creator', {
-    localField: 'galaxyId',
-    reference: 'Parent',
-    foreignField: '_id',
-    justOne: true
-})
+// GalaxySchema.virtual('galaxy', {
+//     localField: 'galaxyId',
+//     // ref: 'Parent',
+//     foreignField: '_id',
+//     justOne: true
+// })
