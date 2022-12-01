@@ -2,7 +2,7 @@ import { dbContext } from "../db/DbContext.js";
 
 class PlanetsService {
     async getAll() {
-        const newPlanets = await dbContext.Planets.find()
+        const newPlanets = await dbContext.Planets.find().populate("Galaxy")
         return newPlanets
     }
 

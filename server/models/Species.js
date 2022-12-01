@@ -3,4 +3,10 @@ import { Schema } from "mongoose"
 export const SpeciesSchema = new Schema({
     name: { type: String, required: true },
     homePlanet: { type: String, required: true },
+    planet: { type: String, required: true }
 }, { timestamps: true, toJSON: { virtuals: true } })
+
+SpeciesSchema.virtual("HomePlanet", {
+    localField: "homePlanet",
+    ref: ""
+})
